@@ -81,6 +81,9 @@ class EventLoop {
 public:
     EventLoop(std::size_t sz) {
         epfd_ = ::epoll_create(1024);
+        // why there throw an exception ? you just want to auto trigger std::terminated() ??? 
+        // maybe there is no need to throw an exception , just exit now ... , this is an serious problem
+        // or (std::nothrow) when you need to process other things you want ... ?
         if (epfd_ == -1) {
             throw std::bad_alloc();
         }
